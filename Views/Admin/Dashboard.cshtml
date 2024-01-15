@@ -1,0 +1,127 @@
+﻿@model List<sign>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - UserM</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UserM.styles.css" asp-append-version="true" />
+
+
+</head>
+<body>
+
+    
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" >USAD1</a>
+          
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">User List</a>
+                    </li>
+                </ul>
+            </div>
+            <div class=" mr-2">
+
+                <a class="border-0 mb-5 text-white py-2 px-5 bg-danger  rounded-4 " asp-area="" asp-controller="Admin" asp-action="LogOut">Log Out</a>
+
+            </div>
+        </div>
+    </nav>
+
+ 
+
+    <div class="col-6">
+        <input type="text" placeholder="Search here....." id="txtSearch" class=" form-control m-1 mb-2" style="width:50%" >
+        <i class="bi bi-search"></i>
+       
+    </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                User Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Confirm Password
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    
+   </thead>
+
+   <tbody>
+       @foreach(var obj in Model.DistinctBy(u=>u.Name))
+       {
+       <tr>
+           <td>
+               @obj.Name
+           </td>
+           <td>
+               @obj.UserName
+           </td>
+           <td>
+              @obj.Email
+           </td>
+           <td>
+             @obj.Password
+           </td>
+           <td>
+               @obj.ConformPassword
+           </td>
+           <td>
+               <div class="w-75 btn-group" role="group">
+                   <a asp-controller="Admin" asp-action="Edit" asp-route-id="@obj.ID" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square">Edit</i>
+                   </a>
+                            <a asp-controller="Admin" asp-action="Delete" asp-route-id="@obj.ID" class="btn btn-danger mx-2">
+                                <i class="bi bi-trash">Delete</i>
+                   </a>
+               </div>
+           </td>
+
+       </tr>
+       }
+   </tbody>
+  </table>
+
+
+  @section scripts{
+       <script src="/js/customjs.js"></script>
+  }
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - UserM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/customjs.js" asp-append-version="true"></script>
+
+</body>
+
+</html>
